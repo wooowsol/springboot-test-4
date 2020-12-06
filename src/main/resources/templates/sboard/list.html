@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+
+<header th:replace="/includes/header"/>
+
+    <h1>List Page</h1>
+
+    <ul>
+        <li th:each = "dto : ${result.dtoList}">
+            <a th:href="@{/sboard/get(page=${pageDTO.page}, size=${pageDTO.size}, sno= ${dto.sno})}">[[${dto.sno}]]</a> -- [[${dto.title}]]
+        </li>
+    </ul>
+    <hr/>
+    <ul>
+        <li th:if="${result.prev}">Prev [[${result.start -1}]]</li>
+        <li th:each="num : ${result.pageList}"> 
+            <a th:href="@{/sboard/list(page=${num}, size=${pageDTO.size})}">[[${num}]]</a> 
+        </li>
+        <li th:if="${result.next}">Next [[${result.end +1 }]]</li>
+    </ul>
+
+
+<footer th:replace="/includes/footer"/>
